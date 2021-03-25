@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Linq;
 namespace MG.SedolValidator
 {
-    public class Sedol
+    public sealed class Sedol
     {
         public readonly string Value;
         public readonly int[] CharWeights;
@@ -25,7 +25,7 @@ namespace MG.SedolValidator
             return _validationResult;
         }
 
-        public bool IsValid(out string validationDetails, out bool skipIsUserDefinedValidation)
+        private bool IsValid(out string validationDetails, out bool skipIsUserDefinedValidation)
         {
             validationDetails = null;
             skipIsUserDefinedValidation = true;

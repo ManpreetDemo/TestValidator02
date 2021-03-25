@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 using System.Globalization;
-using System.Linq;
+
 namespace MG.SedolValidator
 {
     public sealed class Sedol
@@ -19,7 +19,7 @@ namespace MG.SedolValidator
         public ISedolValidationResult GetValidationResult()
         {
             if (_validationResult == null)
-            {                 
+            {
                 _validationResult = new ValidationResult(Value, IsValid(out string validationDetails, out bool skipIsUserDefinedValidation), IsUserDefined(ref validationDetails, ref skipIsUserDefinedValidation), validationDetails);
             }
             return _validationResult;
@@ -51,8 +51,8 @@ namespace MG.SedolValidator
             }
 
             skipIsUserDefinedValidation = false;
-            var checksumDigitChar = GetChecksumDigit();
-            var lastChar = Value.Last();
+            var checksumDigitChar = GetChecksumDigitChar();
+            var lastChar = Value[Value.Length-1];
             if (lastChar != checksumDigitChar)
             {
                 validationDetails = SedolConstants.ExceptionChecksumDigitDoesNotAgree;
@@ -69,7 +69,7 @@ namespace MG.SedolValidator
             return result;
         }
 
-        private char GetChecksumDigit()
+        private char GetChecksumDigitChar()
         {
             string valuePart1 = Value.Substring(0, 6);
             //string valuePart2 = Value.Substring(Value.Length - 1);

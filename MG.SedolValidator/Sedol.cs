@@ -43,7 +43,7 @@ namespace MG.SedolValidator
 
             foreach (char c in Value)
             {
-                if (SedolConstants.Alphabet.IndexOf(c) < 0)
+                if (SedolConstants.AllowedChars.IndexOf(c) < 0)
                 {
                     validationDetails = SedolConstants.ExceptionInvalidCharacters;
                     return false;
@@ -81,7 +81,7 @@ namespace MG.SedolValidator
                 int m = 0; //multiplier
 
                 if (Char.IsDigit(c)) m = (int)(c - '0');
-                else m = SedolConstants.Alphabet.IndexOf(c); // char index
+                else m = SedolConstants.AllowedChars.IndexOf(c); // char index
 
                 weightedSum += w * m;
             }
@@ -96,7 +96,7 @@ namespace MG.SedolValidator
         public const char UserDefinedCharPrefix = '9';
         public const int UserDefinedCharIndex = 0;
         public const int Length = 7;
-        public const string Alphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        public const string AllowedChars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         public static readonly int[] CharWeights = new int[] { 1, 3, 1, 7, 3, 9, 1 };
         public const string ExceptionNullOrEmpty = "Sedol was null or empty.";
         public static readonly string ExceptionInvalidLength = $"Input string was not {Length}-characters long";
